@@ -13,7 +13,7 @@ jobs:
         run: |
           token=$(uuidgen)
           echo "::add-mask::$token"
-          echo "token=$token" >> $GITHUB_OUTPUT
+          echo "TOKEN=$token" >> $GITHUB_ENV
 
   use-token:
     runs-on: ubuntu-latest
