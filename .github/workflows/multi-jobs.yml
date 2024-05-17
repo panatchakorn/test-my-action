@@ -1,0 +1,28 @@
+name: Two Job Workflow
+
+on: [push]
+
+jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.generate.outputs.token }}
+    steps:
+      - name: Generate Token
+        id: generate
+        run: |
+          token=$(uuidgen)
+          echo "::add-mask::$token"
+          echo "::set-output name=token::$token"
+
+  use-token:
+    runs-on: ubuntu-latest
+    needs: generate-token
+    steps:
+      - name: Set Secret Token
+        run: echo "TOKEN=${{ needs.generate-token.outputs.token }}" >> $GITHUB_ENV
+
+      - name: Echo Token
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        run: echo "The token is $TOKEN"
