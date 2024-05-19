@@ -23,6 +23,7 @@ jobs:
         run: echo "TOKEN=${{ needs.generate-token.outputs.token }}" >> $GITHUB_ENV
 
       - name: Echo Token
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
-        run: echo "The token is $TOKEN"
+        run: echo TOKEN=$TOKEN
+#        env:
+#          TOKEN: ${{ secrets.TOKEN }}
+#        run: echo "The token is $TOKEN"
