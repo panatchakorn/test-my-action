@@ -9,11 +9,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Set up JDK ${{ github.event.inputs.javaVersion }}
+    - name: Set up JDK ${{ inputs.javaVersion }}
       uses: actions/setup-java@v4
       with:
         distribution: 'adopt'
-        java-version: ${{ github.event.inputs.javaVersion }}
+        java-version: ${{ inputs.javaVersion }}
 
     - name: Create .m2 folder
       run: mkdir -p $HOME/.m2
