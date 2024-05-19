@@ -1,0 +1,13 @@
+name: 'Setup'
+description: 'Setup workflow'
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up JDK ${{ github.event.inputs.javaVersion }}
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'adopt'
+        java-version: ${{ github.event.inputs.javaVersion }}
+
+    - name: Copy settings.xml
+      run: cp ./settings.xml $HOME/.m2/settings.xml

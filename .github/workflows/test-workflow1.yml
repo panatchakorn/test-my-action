@@ -1,0 +1,20 @@
+name: Test Workflow 1
+run-name: Test Workflow 1
+
+on:
+  push
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use setup action
+        uses: ./.github/actions/setup.yml
+        with:
+          javaVersion: '17'
+
+      - name: Print settings.xml
+        run: cat $HOME/.m2/settings.xml
