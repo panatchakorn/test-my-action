@@ -1,5 +1,11 @@
 name: 'Setup'
 description: 'Setup workflow'
+inputs:
+  javaVersion:
+    description: 'Java version'
+    required: true
+    type: string
+    default: '11'
 runs:
   using: 'composite'
   steps:
@@ -9,5 +15,8 @@ runs:
         distribution: 'adopt'
         java-version: ${{ github.event.inputs.javaVersion }}
 
-    - name: Copy settings.xml
+    - name: Create .m2 folder
+      run: mkdir -p $HOME/.m2
+
+    - name: Copy settings.xml to .m2 folder
       run: cp ./settings.xml $HOME/.m2/settings.xml
